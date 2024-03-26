@@ -18,8 +18,8 @@ GPIO.setup(7, GPIO.IN)
 
 # Use mpr121 class for everything else
 
-mpr121.TOU_THRESH = 0x30
-mpr121.REL_THRESH = 0x33
+mpr121.TOU_THRESH = 0x45
+mpr121.REL_THRESH = 0x48
 mpr121.setup(0x5a)
 
 # User pygame for sounds
