@@ -38,6 +38,8 @@ clap = pygame.mixer.Sound('samples/clap.wav')
 clap.set_volume(.65)
 cymbal = pygame.mixer.Sound('samples/cymbal.wav')
 cymbal.set_volume(.65)
+buzzer = pygame.mixer.Sound('samples/buzzer.wav')
+buzzer.set_volume(.75)
 
 # Track touches
 
@@ -94,7 +96,7 @@ while True:
         print("Congratulations! You matched the sequence.")
     else:
         print("Wrong sequence! Playing kick sound.")
-        kick.play()
+        buzzer.play()
 
     # Wait until pin 7 is pressed before exiting
     print("Press pin 7 to exit or pin 6 to restart...")
