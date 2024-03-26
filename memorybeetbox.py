@@ -18,7 +18,8 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(7, GPIO.IN)  # Pin 7 for exiting the program
 
 # Use mpr121 class for everything else
-mpr121.TOU_THRESH = 0x30
+mpr121.TOU_THRESH = 0x48
+mpr121.REL_THRESH = 0x45
 mpr121.setup(0x5a)
 
 # User pygame for sounds
@@ -37,6 +38,10 @@ clap = pygame.mixer.Sound('samples/clap.wav')
 clap.set_volume(.65)
 cymbal = pygame.mixer.Sound('samples/cymbal.wav')
 cymbal.set_volume(.65)
+
+# Track touches
+
+touches = [0] * 8;
 
 # Define sound list
 sounds = [kick, snare, openhh, closedhh, clap, cymbal]
@@ -58,11 +63,15 @@ def get_player_sequence():
             print("Restarting the game...")
             return None  # Return None to indicate game restart
         else:
-            for i in range(12):
+            for i in range(8):
                 if i != 7 and touchData & (1 << i):
-                    sounds[i].play()
-                    player_sequence.append(i)
-                    time.sleep(0.5)  # Short delay to avoid registering multiple touches
+                    if (touches[i] == 0):
+                        sounds[i].play()
+                        player_sequence.append(i)
+                        time.sleep(0.5)  # Short delay to avoid registering multiple touches
+                    touches[i] = 1;
+                else:
+                    touches[i] = 0;
     return player_sequence
 
 while True:
