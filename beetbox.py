@@ -63,7 +63,7 @@ while True:
                         clap.play()
                     elif i == 5:
                         cymbal.play()
-                    elif i == 11:
+                    elif i == 7:
                         print('Exiting...')
                         sys.exit()  # Exit the application
                     last_played[i] = current_time
